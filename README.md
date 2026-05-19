@@ -50,7 +50,7 @@ To run the agent and generate code into the frontend boilerplate based on a spec
 
 ```bash
 cd agent
-npm start ../spec.txt
+npm start spec.txt
 ```
 
 ---
