@@ -1,0 +1,12 @@
+Build a responsive Car Inventory Manager with React, TypeScript, Apollo Client, and Material UI.
+
+1. The app should display a list of cars fetched via Apollo Client from a mock GraphQL API (GetCars query).
+2. Show responsive car images — use the mobile, tablet, and desktop image URLs from the GraphQL schema and render the appropriate image based on viewport width:
+   - ≤ 640px → mobile
+   - 641px – 1023px → tablet
+   - ≥ 1024px → desktop
+3. Use Material UI cards to present each car (make, model, year, color, image).
+4. Include an "Add Car" form that submits via a GraphQL mutation (AddCar).
+5. Implement sorting and search — a search bar to filter by model, plus sorting by year or make.
+6. Extract GraphQL logic into a `useCars()` custom hook.
+7. Include unit tests for key components.
