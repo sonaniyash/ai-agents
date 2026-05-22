@@ -62,9 +62,9 @@ npm start spec.txt
 The agent is built using a modular architecture utilizing LangGraph to manage the state machine and loop.
 
 1. **Planner (`core/planner.ts`)**: Takes the raw `spec.txt` and the state of the workspace. It breaks the specification down into a clear dependency graph of files that need to be created or modified.
-2. **Executor/Generator (`core/generator.ts`)**: Generates each file individually in topological order. It is provided context from previously generated code to ensure consistent imports and logic.
-3. **Validator (`core/validator.ts`)**: Shells out to execute `npm run typecheck && npm run test` inside the target directory.
-4. **Retry Loop (`core/agent.ts`)**: If validation fails, the compiler or test runner output is captured and fed back to the LLM to fix the generated code. A LangGraph conditional edge handles up to 2 retry iterations before cleanly aborting or succeeding.
+2. **Graph Nodes (`core/nodes.ts`)**: Contains `generateCodeNode` for file generation with LLM context, and `validateCodeNode` which shells out to execute `npm run typecheck && npm run test` in the target directory.
+3. **Workflow (`core/workflow.ts`)**: Defines the LangGraph state machine and conditional edges (retry loop). If validation fails, the output is fed back into the generator up to 2 retry iterations.
+4. **Agent Execution (`core/agent.ts`)**: Coordinates the execution by invoking the LangGraph workflow sequentially for each file task in the dependency graph.
 
 ```mermaid
 graph TD

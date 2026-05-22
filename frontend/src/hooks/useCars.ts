@@ -4,7 +4,7 @@ import { Car } from "../types";
 
 export function useCars() {
   const { data, loading, error } = useQuery<{ cars: Car[] }>(GET_CARS);
-  
+
   const [addCarMutation] = useMutation(ADD_CAR, {
     update(cache, { data: { addCar } }) {
       const existingCars = cache.readQuery<{ cars: Car[] }>({ query: GET_CARS });
@@ -14,6 +14,9 @@ export function useCars() {
           data: { cars: [...existingCars.cars, addCar] },
         });
       }
+    },
+    onError(error) {
+      console.error("Add car failed:", error.message);
     },
   });
 
